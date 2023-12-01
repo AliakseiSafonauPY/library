@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="grad flex flex-col items-center justify-center text-center w-full">
+    <div class="text-slate-700 font-medium text-7xl mb-10 w-full">Регистрация книги</div>
+    <form method="post" enctype='multipart/form-data' class="w-[80%]">
+        {% csrf_token %}
+        <div class="flex">
+            <div class="input-box text-left px-2">
+                {% for i in book_form %}
+                <div>
+                    {% if i.name != 'rating' %}
+                    <label class="form-label text-slate-600 font-normal" for="{{i.id_for_label}}">{{i.label}}</label>
+                    {% if i.name == "genre" %}
+                    <div class="genre">{{i}}</div>
+                    {% else %}
+                    <div>
+                        {{i}}
+                    </div>
+                    {% endif %}
+                    <div class="form-error">{{i.errors}}</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <label for="rating_id"></label>
+                <input type="hidden" class="bgw" name="rating" value="0" id="rating_id" readonly="readonly" />
+            </div>
+            <div class="input-box text-left px-2">
+                {% for i in author_form %}
+                <div>
+                    <label class="form-label text-slate-600 font-normal" for="{{i.id_for_label}}">{{i.label}}</label>
+                    <div>
+                        {{i}}
+                    </div>
+                    <div class="form-error">{{i.errors}}</div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="input-box-photo text-left px-2">
+                {{author_photo_form}}
+                {% for i in author_photo_form %}
+                <div class="form-error-photo">{{i.non_form_errors}}</div>
+                {% endfor %}
+            </div>
+            <div class="input-box-photo text-left px-2">
+                {{cover_form}}
+                {% for i in cover_form %}
+                <div class="form-error-photo">{{i.non_form_errors}}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <button type="submit" class="my-6 rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">Регистрация</button>
+        <hr>
+    </form>
+</div>
+{% endblock %}
