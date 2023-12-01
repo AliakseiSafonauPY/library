@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="grad flex flex-col items-center justify-center text-center w-full">
+    <div class="text-slate-700 font-medium text-7xl mb-10">Регистрация читателя</div>
+    <form method="post" class="flex w-full flex-col justify-center items-center">
+        {% csrf_token %}
+        <div class="flex justify-center text-center w-[1000px] flex-wrap">
+            {% for i in form %}
+            <div class="input-box text-left px-2">
+                <div class="flex flex-col">
+                    <label class="form-label text-slate-600 font-normal" for="{{i.id_for_label}}">{{i.label}}</label>
+                    <div>{{i}}</div>
+                    <div class="form-error">{{i.errors}}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="my-6 rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">Регистрация</button>
+        <hr>
+    </form>
+</div>
+
+{% endblock %}

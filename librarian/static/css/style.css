@@ -1,0 +1,90 @@
+.form-error{
+    height: 24px;
+}
+
+.shadow_down {
+    box-shadow: 0px -1px 3px 0px rgba(34, 60, 80, 0.2);
+}
+
+.grad {
+    background: linear-gradient(315deg, rgb(235, 236, 246) 23%, rgb(235, 226, 236), rgb(239, 240, 233));
+}
+input[type="date"]:not(.has-value):before{
+  content: attr(placeholder);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: none;
+  outline: none;
+  outline-inset: none;
+  -webkit-text-fill-color: #ссс;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+  background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(0,174,255,0.04) 50%,rgba(255,255,255,0) 51%,rgba(0,174,255,0.03) 100%);
+}
+
+th, td {
+    padding: 5px
+}
+
+input {
+    caret-color: #ffffff;
+    width: inherit;
+    outline: none;
+    background: transparent;
+}
+
+textarea:focus {
+    border: none;
+    outline: none;
+    outline-inset: none;
+    caret-color: #ffffff;
+}
+
+.input-box {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+select {
+    caret-color: #ffffff;
+    width: inherit;
+    outline: 0;
+    background: transparent;
+}
+
+#id_genre {
+    height: 150px;
+    width: 235px;
+    overflow-y: scroll;
+    background-color: #ffffff;
+    padding: 5px;
+}
+.bgw {
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.genre {
+    border-radius: 10px;
+    margin-right: 5px;
+}
+
+.input-box-photo {
+    display: flex;
+    flex-direction: column;
+}
