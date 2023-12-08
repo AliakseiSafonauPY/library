@@ -1,7 +1,6 @@
 from django import forms
-from django.forms import formset_factory
 
-from .models import Reader, Book, Genre, Author, AuthorPhoto, CoverPhoto
+from .models import Reader, Book, Genre, Author, AuthorPhoto, CoverPhoto, Violation
 
 
 class MainForm(forms.ModelForm):
@@ -47,28 +46,46 @@ class RegisterAuthorForm(forms.ModelForm):
         model = Author
         fields = ['author']
         widgets = {
-            'author': forms.Textarea(attrs={'class': 'authors bgw', 'rows': 7, 'cols': 25})
+            'author': forms.Textarea(attrs={'class': 'authors bgw', 'rows': 5, 'cols': 25})
         }
 
 
-class RegisterAuthorPhotoForm(forms.ModelForm):
+class MultipleFileInput(forms.ClearableFileInput):
+    allow_multiple_selected = True
 
+
+class MultipleFileField(forms.FileField):
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("widget", MultipleFileInput())
+        super().__init__(*args, **kwargs)
+
+    def clean(self, data, initial=None):
+        single_file_clean = super().clean
+        if isinstance(data, (list, tuple)):
+            result = [single_file_clean(d, initial) for d in data]
+        else:
+            result = single_file_clean(data, initial)
+        return result
+
+
+
+class RegisterAuthorPhotoForm(forms.Form):
+    author_photo = MultipleFileField(required=False)
+
+
+class RegisterCoverForm(forms.Form):
+    cover_photo = MultipleFileField()
+
+
+class RegisterViolationPhotoForm(forms.Form):
+    photo = MultipleFileField(required=False)
+
+
+class ViolationForm(forms.ModelForm):
     class Meta:
-        model = AuthorPhoto
-        fields = ['author_photo']
+        model = Violation
+        fields = ['text']
         widgets = {
-            'author_photo': forms.ClearableFileInput(attrs={'class': 'author-photo'})
+            'text': forms.Textarea(attrs={'class': 'violation_text bgw', 'rows': 5, 'cols': 25})
         }
-
-
-class RegisterCoverForm(forms.ModelForm):
-    class Meta:
-        model = CoverPhoto
-        fields = ['cover_photo']
-        widgets = {
-            'cover_photo': forms.ClearableFileInput(attrs={'class': 'cover-photo'})
-        }
-
-
-AuthorsPhotosFormSet = formset_factory(RegisterAuthorPhotoForm, extra=5)
-CoverPhotosFormSet = formset_factory(RegisterCoverForm, extra=5)
+    

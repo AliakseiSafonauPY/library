@@ -7,38 +7,42 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     {% load static %}
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" type="text/css">
     <link rel="shortcut icon"  href="{% static 'favicon.ico' %}" type="image/x-icon">
     <title>Library</title>
 </head>
 <body>
-    <header class="flex items-center justify-center h-[100px] bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">
-        <a href="/" class="w-full flex items-center justify-center">
-            {% load static %}
-            <img src="{% static 'logo.png' %}" class="h-[100px]">
-        </a>
-    </header>
-    <main>
-        <div class="bg-white px-6 py-4 shadow">
-            <nav class="flex flex-wrap items-center justify-center space-x-4">
-                {% for i in nav %}
-                <a href="{% url i.1 %}" class="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">{{i.0}}</a>
-                {% endfor %}
-                <form action="{% url 'librarian:reader_list' %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="process" value="issuance">
-                    <button type="submit" class="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">Выдача книг</button>
-                </form>
-                <form action="{% url 'librarian:reader_list' %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="process" value="return">
-                    <button type="submit" class="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">Возврат книг</button>
-                </form>
-            </nav>
+    <header class="header">
+        <div class="header-container">
+            <a href="/" class="header-logo">
+                {% load static %}
+                <img src="{% static 'logo.png' %}" class="header-img">
+            </a>
         </div>
-        {% block content %}
-        {% endblock content %}
+    </header>
+    <main class="main">
+        <div class="main-container">
+            <nav class="main-nav">
+                <div class="main__nav-container">
+                    {% for i in nav %}
+                    <a href="{% url i.1 %}" class="main-nav__btn">{{i.0}}</a>
+                    {% endfor %}
+                    <form action="{% url 'librarian:reader_list' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="process" value="issuance">
+                        <button type="submit" class="main-nav__btn">Выдача книг</button>
+                    </form>
+                    <form action="{% url 'librarian:reader_list' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="process" value="return">
+                        <button type="submit" class="main-nav__btn">Возврат книг</button>
+                    </form>
+                </div>
+            </nav>
+            {% block content %}
+            {% endblock content %}
+        </div>
     </main>
 </body>
 </html>

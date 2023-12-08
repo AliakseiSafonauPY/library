@@ -1,24 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="grad flex flex-col justify-center items-center w-full">
-    <div class="text-slate-700 font-medium text-7xl mb-10">Информация о читателе</div>
-    <div class="w-[1000px] flex">
-        <div class="w-[400px] mr-8">
-            <div class="font-bold text-lg text-slate-700 leading-snug">{{ reader_info.surname }} {{ reader_info.name }} {{ reader_info.patronymic }}</div>
-            <div>{{ reader_info.email }}</div>
-            <div>{{ reader_info.birth }}</div>
-            <div>{{ reader_info.passport_id }}</div>
-            <div>{{ reader_info.residence }}</div>
-        </div>
-        <div>
-            <div class="">
-                <div>1984   5 June, 2023</div>
+<div class="main-content">
+    <div class="main__content-container">
+        <div class="main-page">
+            <div class="main__page-container">
+                <div class="main__page-title">Информация о читателе</div>
             </div>
-            <div>+</div>
-            <div>+</div>
-            <div>+</div>
-            <div>+</div>
+        </div>
+        <div class="main-info">
+            <div class="main__info-container">
+                <div class="info-name">{{ reader_info.surname }} {{ reader_info.name }} {{ reader_info.patronymic }}</div>
+                <div class="main__info-content">
+                    <div class="info-content">
+                        <div class="info-label">Почта:</div>
+                        <div class="info-title">{{ reader_info.email }}</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">День рождения:</div>
+                        <div class="info-title">{{ reader_info.birth }}</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">Серия и номер паспорта:</div>
+                        <div class="info-title">{{ reader_info.passport_id }}</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">Место жительства:</div>
+                        <div class="info-title">{{ reader_info.residence }}</div>
+                    </div>
+                </div>
+                <div class="books">Книги на руках:
+                    <div class="book">
+                        <div>1984   5 June, 2023</div>
+                    </div>
+                    <div>+</div>
+                    <div>+</div>
+                    <div>+</div>
+                    <div>+</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

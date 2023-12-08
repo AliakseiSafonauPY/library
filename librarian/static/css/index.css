@@ -1,0 +1,478 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.header {
+  width: 100%;
+  height: 80px;
+}
+.header .header-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.header .header-container .header-logo {
+  width: 600px;
+  height: 100%;
+}
+.header .header-container .header-img {
+  width: 100%;
+  height: 100%;
+}
+
+.main {
+  width: 100%;
+  height: -moz-max-content;
+  height: max-content;
+}
+.main .main-container {
+  width: 100%;
+  height: 100%;
+  padding-top: 20px;
+}
+.main .main-container .main-nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.main .main-container .main-nav .main__nav-container {
+  display: flex;
+  justify-content: space-around;
+  width: 900px;
+  padding: 5px;
+}
+.main .main-container .main-nav .main__nav-container .main-nav__btn {
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 1px 0px 10px 2px rgba(34, 60, 80, 0.2) inset;
+  color: black;
+  background-color: aliceblue;
+  transition: color 0.3s, background-color 0.3s ease;
+}
+.main .main-container .main-nav .main__nav-container .main-nav__btn:hover {
+  color: aliceblue;
+  background-color: gray;
+}
+.main .main-container .main-content {
+  width: 100%;
+}
+.main .main-container .main-content .main__content-container {
+  display: flex;
+  flex-direction: column;
+}
+.main .main-container .main-content .main__content-container .main-page {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.main .main-container .main-content .main__content-container .main-page .main__page-container {
+  padding: 10px;
+}
+.main .main-container .main-content .main__content-container .main-page .main__page-container .main__page-title {
+  font-size: 32px;
+  font-weight: 600;
+}
+.main .main-container .main-content .main__content-container .main-table {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.main .main-container .main-content .main__content-container .main-table .table__th {
+  padding: 5px;
+  font-weight: 600;
+  width: 150px;
+}
+.main .main-container .main-content .main__content-container .main-table .table__td {
+  padding: 5px;
+  border-bottom: 1px solid rgb(0, 0, 0);
+}
+.main .main-container .main-content .main__content-container .main-pagination {
+  width: 100%;
+}
+.main .main-container .main-content .main__content-container .main-pagination .main__pagination-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.main .main-container .main-content .main__content-container .main-pagination .main__pagination-container .main__pagination-pages {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+.main .main-container .main-content .main__content-container .main-pagination .main__pagination-container .main___pagination-steps {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+.main .main-container .main-content .main__content-container .main-pagination .main__pagination-container .main___pagination-steps .main__step {
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 1px 0px 10px 2px rgba(34, 60, 80, 0.2) inset;
+  color: black;
+  background-color: aliceblue;
+  transition: color 0.3s, background-color 0.3s ease;
+}
+.main .main-container .main-content .main__content-container .main-pagination .main__pagination-container .main___pagination-steps .main__step:hover {
+  color: aliceblue;
+  background-color: gray;
+}
+.main .main-container .main-content .main__content-container .main-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.main .main-container .main-content .main__content-container .main-form .main__form-container {
+  width: 900px;
+  padding: 5px;
+}
+.main .main-container .main-content .main__content-container .main-form .main__form-container .main__form-content {
+  display: flex;
+}
+.main .main-container .main-content .main__content-container .main-form .main__form-container .main__form-content .main__input-boxes {
+  padding: 5px;
+}
+.main .main-container .main-content .main__content-container .main-form .main__form-container .main__form-content .genre {
+  border: 1px solid rgb(138, 145, 151);
+  border-radius: 10px;
+}
+.main .main-container .main-content .main__content-container .main-form .main__form-container .main__form-content .input-boxes {
+  font-size: smaller;
+  padding: 5px;
+}
+.main .main-container .main-content .main__content-container .main-form .main__form-container .main__form-content .form-error {
+  color: red;
+  height: 14px;
+  font-size: smaller;
+  padding-left: 5px;
+  margin-top: 5px;
+}
+.main .main-container .main-content .main__content-container .main-form .main__form-container .main__form-content .input-box-photo label {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+}
+.main .main-container .main-content .main__content-container .main-form .main__form-container .main__form-content .input-box-photo input {
+  width: 233px;
+}
+.main .main-container .main-content .main__content-container .main-form .main__form-container .main__form-button {
+  display: flex;
+  justify-content: center;
+}
+.main .main-container .main-content .main__content-container .main-form .main__form-container .main__form-button .main__form-btn {
+  padding: 10px;
+  font-weight: 600;
+  border-radius: 10px;
+  background-color: rgb(32, 128, 218);
+  color: aliceblue;
+}
+.main .main-container .main-content .main__content-container .main-form .main__form-container .main__form-button .main__form-btn:hover {
+  text-shadow: #FC0 1px 0 10px;
+  box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+}
+.main .main-container .main-content .main__content-container .main-form .main__form-container .main__form-button .main__form-btn:active {
+  color: #FC0;
+  text-shadow: #FC0 1px 0 10px;
+  box-shadow: -5px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+  background-color: rgb(0, 49, 95);
+}
+.main .main-container .main-content .main__content-container .main-form .main__form-container hr {
+  box-shadow: 0px 1px 5px 1px rgba(34, 60, 80, 0.2);
+}
+.main .main-container .main-content .main__content-container .main-info {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container {
+  width: 70%;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .info-name {
+  font-size: 24px;
+  font-weight: 600;
+  padding: 10px;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-content {
+  display: flex;
+  justify-content: space-around;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-content .info-content {
+  padding: 10px;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-content .info-content .info-title {
+  padding: 10px;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .books {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .books .book {
+  padding: 10px;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-book__content {
+  display: flex;
+  padding: 5px;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-book__content .main__info-cover__photos {
+  width: 210px;
+  height: 350px;
+  padding: 5px;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-book__content .main__info-cover__photos .main__info-cover__photo {
+  width: 100%;
+  height: 100%;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-book__content .main__info-photos {
+  display: flex;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-book__content .main__info-photos .main__info-photos__cover_photos {
+  height: 100px;
+  width: 50px;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-book__content .main__info-photos .main__info-photos__cover_photos .main__info-photos__cover_photo {
+  height: 100%;
+  width: 100%;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-book__content .main__info-main {
+  display: flex;
+  width: 750px;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-book__content .main__info-main .info__main {
+  width: 270px;
+  padding: 5px;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-book__content .main__info-main .info__main .info__author-photos {
+  width: 60px;
+  height: 80px;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-book__content .main__info-main .info__main .info__author-photos .info__author-photo {
+  width: 100%;
+  height: 100%;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-book__content .main__info-main .info__main__instances {
+  padding: 5px;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-book__content .main__info-main .info__main__instances .info__main__instances-btn {
+  margin: 5px;
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 1px 0px 10px 2px rgba(34, 60, 80, 0.2) inset;
+  color: black;
+  background-color: aliceblue;
+  transition: color 0.3s, background-color 0.3s ease;
+}
+.main .main-container .main-content .main__content-container .main-info .main__info-container .main__info-book__content .main__info-main .info__main__instances .info__main__instances-btn:hover {
+  color: aliceblue;
+  background-color: gray;
+}
+.main .main-container .main-content .main__content-container .main-issuing {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main__issuing-container {
+  position: relative;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main__issuing {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 10px;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main__issuing__books {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main__issuing__books .main__issuing__book {
+  padding: 5px;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main__issuing__books .main__issuing__book-btn {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 1px 0px 10px 2px rgba(34, 60, 80, 0.2) inset;
+  color: black;
+  background-color: aliceblue;
+  transition: color 0.3s, background-color 0.3s ease;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main__issuing__books .main__issuing__book-btn:hover {
+  color: aliceblue;
+  background-color: gray;
+}
+.main .main-container .main-content .main__content-container .main-issuing .popup {
+  position: absolute;
+  z-index: 1000;
+  left: 200px;
+  padding: 14px;
+  width: 70%;
+  min-height: 400px;
+  background-color: azure;
+  box-shadow: 1px 2px 14px 4px rgba(34, 60, 80, 0.2) inset;
+}
+.main .main-container .main-content .main__content-container .main-issuing .popup .popup-container {
+  width: 100%;
+}
+.main .main-container .main-content .main__content-container .main-issuing .popup .popup-container .popup-form {
+  display: flex;
+  justify-content: space-around;
+}
+.main .main-container .main-content .main__content-container .main-issuing .popup .popup-container .popup-form .popup-form__title {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.main .main-container .main-content .main__content-container .main-issuing .popup .popup-container .popup-form .popup-form__button {
+  display: flex;
+  align-items: center;
+}
+.main .main-container .main-content .main__content-container .main-issuing .popup .popup-container .popup-form .popup-form__button .popup-form__btn {
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 1px 0px 10px 2px rgba(67, 146, 206, 0.76) inset;
+  color: black;
+  background-color: aliceblue;
+  transition: color 0.3s, background-color 0.3s ease;
+}
+.main .main-container .main-content .main__content-container .main-issuing .popup .popup-container .popup-form .popup-form__button .popup-form__btn:hover {
+  color: aliceblue;
+  background-color: rgb(87, 129, 185);
+}
+.main .main-container .main-content .main__content-container .main-issuing .main-issuing__preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main-issuing__preview {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main-issuing__preview-form {
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main-issuing__preview-form .main-issuing__preview-item {
+  margin-right: 20px;
+  padding: 10px;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main-issuing__preview-form .main-issuing__preview-btn {
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 1px 0px 10px 2px rgba(235, 12, 12, 0.2) inset;
+  color: black;
+  background-color: rgba(228, 169, 169, 0.205);
+  transition: color 0.3s, background-color 0.3s ease;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main-issuing__preview-form .main-issuing__preview-btn:hover {
+  color: aliceblue;
+  background-color: rgb(184, 62, 62);
+}
+.main .main-container .main-content .main__content-container .main-issuing .main-issuing__preview-repeat {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid red;
+  border-radius: 10px;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main-issuing__search-form {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main-issuing__search-form .main-issuing__search-btn {
+  margin-left: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 1px 0px 10px 2px rgba(34, 60, 80, 0.2) inset;
+  color: black;
+  background-color: aliceblue;
+  transition: color 0.3s, background-color 0.3s ease;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main-issuing__search-form .main-issuing__search-btn:hover {
+  color: aliceblue;
+  background-color: gray;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main-issuing__preview-button {
+  padding-top: 20px;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main-issuing__preview-button .main-issuing__preview__button {
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 1px 0px 10px 2px rgba(34, 60, 80, 0.2) inset;
+  color: black;
+  background-color: aliceblue;
+  transition: color 0.3s, background-color 0.3s ease;
+}
+.main .main-container .main-content .main__content-container .main-issuing .main-issuing__preview-button .main-issuing__preview__button:hover {
+  color: aliceblue;
+  background-color: gray;
+}
+.main .main-container .main-content .main__content-container .main-returning {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main .main-container .main-content .main__content-container .main-returning .main__returning-container {
+  width: 60%;
+}
+.main .main-container .main-content .main__content-container .main-returning .main__returning-container .main__returning {
+  text-align: center;
+  font-size: 22px;
+  padding: 10px;
+}
+.main .main-container .main-content .main__content-container .main-returning .main__returning-container .returning__violences, .main .main-container .main-content .main__content-container .main-returning .main__returning-container .returning-costs {
+  display: flex;
+  flex-wrap: wrap;
+}
+.main .main-container .main-content .main__content-container .main-returning .main__returning-container .returning__book {
+  padding: 10px;
+  font-weight: 600;
+}
+.main .main-container .main-content .main__content-container .main-returning .main__returning-container .returning__violences-label, .main .main-container .main-content .main__content-container .main-returning .main__returning-container .returning__violences-text, .main .main-container .main-content .main__content-container .main-returning .main__returning-container .returning__violences-photos, .main .main-container .main-content .main__content-container .main-returning .main__returning-container .returning__cost {
+  padding: 10px;
+}
+.main .main-container .main-content .main__content-container .main-returning .main__returning-container .returning__violences-text {
+  margin: 10px 10px 10px 0;
+}
+.main .main-container .main-content .main__content-container .main-returning .main__returning-container .returning__costs-item {
+  padding: 5px;
+  width: 80px;
+}
+.main .main-container .main-content .main__content-container .main-returning .main__returning-container .returning__costs-reting, .main .main-container .main-content .main__content-container .main-returning .main__returning-container .returning__costs-rating {
+  padding: 5px;
+}
+.main .main-container .main-content .main__content-container .main-returning .main__returning-container .main-returning__button {
+  padding-top: 10px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.main .main-container .main-content .main__content-container .main-returning .main__returning-container .main-returning__btn {
+  padding: 8px;
+  border-radius: 10px;
+  box-shadow: 1px 0px 10px 2px rgba(34, 60, 80, 0.2) inset;
+  color: black;
+  background-color: aliceblue;
+  transition: color 0.3s, background-color 0.3s ease;
+}
+.main .main-container .main-content .main__content-container .main-returning .main__returning-container .main-returning__btn:hover {
+  color: aliceblue;
+  background-color: gray;
+}
+.main .main-container .main-content .main__content-container .main-returning .main__returning-container .returning__results {
+  display: flex;
+  padding: 5px;
+  align-items: center;
+}
+.main .main-container .main-content .main__content-container .main-returning .main__returning-container .returning__results .returning__result {
+  margin-left: 10px;
+  padding: 5px;
+}/*# sourceMappingURL=index.css.map */

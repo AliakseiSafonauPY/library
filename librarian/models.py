@@ -10,9 +10,9 @@ class Book(models.Model):
     price = models.DecimalField(max_digits=15, decimal_places=2)
     instance = models.IntegerField()
     price_per_day = models.DecimalField(max_digits=15, decimal_places=2)
-    publishing = models.DateField(blank=True)
+    publishing = models.DateField(blank=True, null=True)
     registration = models.DateTimeField(default=timezone.now)
-    pages = models.IntegerField(blank=True)
+    pages = models.IntegerField(blank=True, null=True)
     rating = models.DecimalField(max_digits=15, decimal_places=2, blank=True, null=True)
 
     def get_absolute_url(self, **kwargs):
@@ -60,7 +60,7 @@ class Author(models.Model):
 
 
 class AuthorPhoto(models.Model):
-    author_photo = models.ImageField(upload_to='image')
+    author_photo = models.ImageField(upload_to='image', blank=True, null=True)
     book = models.ForeignKey('Book', on_delete=models.CASCADE)
 
 

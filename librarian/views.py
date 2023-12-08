@@ -6,7 +6,9 @@ from datetime import *
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, CreateView, TemplateView, DetailView
 
-from .forms import RegisterReaderForm, RegisterBookForm, RegisterAuthorForm, AuthorsPhotosFormSet, CoverPhotosFormSet
+from django.utils.datastructures import MultiValueDict
+
+from .forms import RegisterReaderForm, RegisterBookForm, RegisterAuthorForm, RegisterAuthorPhotoForm, RegisterCoverForm
 from .models import Book, Reader, Author, CoverPhoto, Copy, AuthorPhoto, ActIssuing, ActReturning, Votes, Violation, \
     ViolationPhoto
 from .utils import get_header_nav, get_num_copies
@@ -131,8 +133,8 @@ class RegisterBookView(TemplateView):
         context = super().get_context_data(**kwargs)
         book_form = RegisterBookForm(self.request.POST or None)
         author_form = RegisterAuthorForm(self.request.POST or None)
-        author_photo_form = AuthorsPhotosFormSet(self.request.POST or self.request.FILES or None)
-        cover_form = CoverPhotosFormSet(self.request.POST or self.request.FILES or None)
+        author_photo_form = RegisterAuthorPhotoForm(self.request.POST or self.request.FILES or None)
+        cover_form = RegisterCoverForm(self.request.POST or self.request.FILES or None)
         context['book_form'] = book_form
         context['author_form'] = author_form
         context['author_photo_form'] = author_photo_form
@@ -145,13 +147,12 @@ class RegisterBookView(TemplateView):
         if request.method == 'POST':
             book_form = RegisterBookForm(request.POST)
             author_form = RegisterAuthorForm(request.POST)
-            author_photo_form = AuthorsPhotosFormSet(request.POST, request.FILES)
-            cover_form = CoverPhotosFormSet(request.POST, request.FILES)
+            author_photo_form = RegisterAuthorPhotoForm(request.POST, request.FILES)
+            cover_form = RegisterCoverForm(request.POST, request.FILES)
             if (book_form.is_valid()
                     and author_form.is_valid()
                     and author_photo_form.is_valid()
                     and cover_form.is_valid()):
-                print(book_form.cleaned_data['rating'])
                 book_form.save()
                 book = Book.objects.filter(title_ru=book_form.cleaned_data['title_ru'],
                                            price=book_form.cleaned_data['price'],
@@ -160,9 +161,10 @@ class RegisterBookView(TemplateView):
                     num = b + 1
                     copy = Copy(num=num, status=True, book=book, price_per_day=book.price_per_day)
                     copy.save()
-                for al in author_photo_form.cleaned_data:
+
+                for al in author_photo_form.cleaned_data['author_photo']:
                     if al:
-                        AuthorPhoto.objects.create(author_photo=al['author_photo'], book=book)
+                        AuthorPhoto.objects.create(author_photo=al, book=book)
 
                 st = author_form.cleaned_data['author'].strip()
                 if st:
@@ -172,11 +174,11 @@ class RegisterBookView(TemplateView):
                         author = Author(author=s, book=book)
                         author.save()
 
-                # cover_counter = 0
-                for cl in cover_form.cleaned_data:
+                
+                for cl in cover_form.cleaned_data['cover_photo']:
                     if cl:
-                        CoverPhoto.objects.create(cover_photo=cl['cover_photo'], book=book)
-                #         cover_counter += 1
+                        CoverPhoto.objects.create(cover_photo=cl, book=book)
+                
                 return HttpResponseRedirect(book.get_absolute_url())
 
             context = self.get_context_data(**kwargs)
@@ -357,12 +359,18 @@ class Returning(TemplateView):
                               [{re.findall('(\d+)', string)[0]: request.POST[string]} for string in list(request.POST)
                                if re.match(r'violation', string)] if x[list(x)[0]]}
 
-                images = [{re.findall('(\d+)', string)[0]: request.FILES[string]} for string in list(request.FILES)
-                          if re.match(r'img', string)]
-
-                image = {list(images[x])[0]: [y[list(y)[0]] for y in images if list(images[x])[0] == list(y)[0]] for x
-                         in range(len(images))}
-
+                values_list = {}
+                data = request.FILES
+                for i in data:
+                    values_list[i] = data.getlist(i, data.getlist('%s[]' % i)) or []
+                images = [{re.findall('(\d+)', string)[0]: values_list[string]} for string in list(values_list) if re.match(r'img', string)]
+                image = []
+                for x in images:
+                    for y in x:
+                        for z in x[y]:
+                            print(z)
+                            image.append({y :[z]})
+                            
                 for cop in range(len(copies)):
                     copies[cop].price_per_day = price_per_day[cop]
                     if boolean[cop] == 'True':
@@ -375,11 +383,12 @@ class Returning(TemplateView):
                                         text=violations.get(str(copies[cop].pk)),
                                         act_returning=act)
                         vio.save()
-                        if image.get(str(copies[cop].pk)):
-                            for loky in image.get(str(copies[cop].pk)):
-                                vio_ph = ViolationPhoto(photo=loky,
-                                                        violation=vio)
-                                vio_ph.save()
+                        for img in image:
+                            if img.get(str(copies[cop].pk)):
+                                for loky in img.get(str(copies[cop].pk)):
+                                    vio_ph = ViolationPhoto(photo=loky,
+                                                            violation=vio)
+                                    vio_ph.save()
                 response = HttpResponseRedirect(act.get_absolute_url())
 
             if response:

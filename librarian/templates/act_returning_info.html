@@ -1,13 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="table grad flex items-center justify-center text-center w-full">
-    <div class="text-slate-700 font-medium text-7xl mb-10">Акт возврата книг №{{act_returning_info.num}}</div>
-    <div class="flex flex-col items-center justify-center text-center">
-        <div class="font-bold text-lg text-slate-700 leading-snug">{{ act_returning_info.reader}}</div>
-        <div class="font-bold text-lg text-slate-700 leading-snug">{{ act_returning_info.tentative_cost }}</div>
-        <div class="font-bold text-lg text-slate-700 leading-snug">{{ act_returning_info.return_date }}</div>
-        <div class="font-bold text-lg text-slate-700 leading-snug">{{ act_returning_info.copies }}</div>
+<div class="main-content">
+    <div class="main__content-container">
+        <div class="main-page">
+            <div class="main__page-container">
+                <div class="main__page-title">Акт возврата книг №{{act_returning_info.num}}</div>
+            </div>
+        </div>
+        <div class="main-info">
+            <div class="main__info-container">
+                <div class="main__info-content">
+                    <div class="info-content">
+                        <div class="info-label">Читатель:</div>
+                        <div class="info-title">{{ act_returning_info.reader }}</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">Итоговая стоимость проката:</div>
+                        <div class="info-title">{{ act_returning_info.cost }} BYN</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">Дата возврата:</div>
+                        <div class="info-title">{{ act_returning_info.return_date }}</div>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">Копии:</div>
+                        <div class="info-title">{{ act_returning_info.copies }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

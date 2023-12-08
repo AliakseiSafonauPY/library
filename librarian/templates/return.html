@@ -1,63 +1,69 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="table grad flex items-center justify-center text-center w-full">
-    <div class="text-slate-700 font-medium text-7xl mb-10">Акт возврата книг № {{ act }}</div>
-    <div class="flex flex-col justify-center text-center items-center flex-wrap">
-        <div>{{ reader }}</div>
-        <div class="flex flex-col justify-center text-center items-center">
-            {% if books %}
-            <form action="" method="post" enctype='multipart/form-data'>
-                <div class="flex">
-                    {% csrf_token %}
-                    {% for book in books %}
-                    <div class="flex flex-col w-max">
-                        <div class="flex">{{book}}</div>
-                        <div class="flex">
-                            <label>
-                                <textarea name="violation_{{book.pk}}"></textarea>
-                            </label>
-                            <div class="flex flex-col">
-                                <label for="img_{{book.pk}}_1"></label>
-                                <input type="file" accept="image/*" name="img_{{book.pk}}_1" id="img_{{book.pk}}_1">
-                                <input type="file" accept="image/*" name="img_{{book.pk}}_2" id="img_{{book.pk}}_2">
-                                <input type="file" accept="image/*" name="img_{{book.pk}}_3" id="img_{{book.pk}}_3">
-                            </div>
-                        </div>
-                        <div class="flex">
-                            <div class="flex justify-center text-center items-center">Штраф : <input type="number" name="fine_{{book.pk}}" id="fine_{{book.pk}}" step="0.01" class="w-[50px]"></div>
-                            <div class="flex justify-center text-center items-center">price_per_day : <input type="number" name="price_per_day_{{book.pk}}" id="{{book.pk}}_price_per_day" step="0.01" class="w-[50px]" value="{{ book.price_per_day }}"></div>
-                            <div class="flex justify-center text-center items-center">status :
-                                <div class="flex justify-center text-center items-center">
-                                    <label for="{{book.pk}}_True">True</label>
-                                    <input type="radio" name="status_{{book.pk}}" id="{{book.pk}}_True" value="True" checked>
-                                    <label for="{{book.pk}}_True">False</label>
-                                    <input type="radio" name="status_{{book.pk}}" id="{{book.pk}}_False" value="False">
+<div class="main-content">
+    <div class="main__content-container">
+        <div class="main-page">
+            <div class="main__page-container">
+                <div class="main__page-title">Акт возврата книг № {{ act }}</div>
+            </div>
+        </div>
+        <div class="main-returning">
+            <div class="main__returning-container">
+                <div class="main__returning">{{ reader }}</div>
+                {% if books %}
+                <form action="" method="post" enctype='multipart/form-data'>
+                    <div class="main__returning__books">
+                        {% csrf_token %}
+                        {% for book in books %}
+                        <div class="main__returning__book">
+                            <div class="returning__book">{{book}}</div>
+                            <div class="returning__violences">
+                                <label class="returning__violences-label">Нарушения: </label>
+                                <textarea class="returning__violences-text" name="violation_{{book.pk}}"></textarea>
+                                <div class="returning__violences-photos">
+                                    <label class="violences__photo-label" for="img_{{book.pk}}"></label>
+                                    <input type="file" accept="image/*" name="img_{{book.pk}}" id="img_{{book.pk}}" multiple>
                                 </div>
                             </div>
-                            <div class="flex justify-center text-center items-center">Рейтинг : <input type="number" name="rating_{{book.book.pk}}" id="rating_{{book.book}}" step="1" max="10" min="0" class="w-[50px]"></div>
+                            <div class="returning-costs">
+                                <div class="returning__cost">Штраф : <input type="number" name="fine_{{book.pk}}" id="fine_{{book.pk}}" step="0.01" class="returning__costs-item"></div>
+                                <div class="returning__cost">Price_per_day : <input type="number" name="price_per_day_{{book.pk}}" id="{{book.pk}}_price_per_day" step="0.01" class="returning__costs-item" value="{{ book.price_per_day }}"></div>
+                                <div class="returning__cost">Status :
+                                    <div class="returning__costs-status">
+                                        <label for="{{book.pk}}_True">True</label>
+                                        <input type="radio" name="status_{{book.pk}}" id="{{book.pk}}_True" value="True" checked>
+                                        <label for="{{book.pk}}_True">False</label>
+                                        <input type="radio" name="status_{{book.pk}}" id="{{book.pk}}_False" value="False">
+                                    </div>
+                                </div>
+                                <div class="returning__costs-rating">Рейтинг : <input type="number" name="rating_{{book.book.pk}}" id="rating_{{book.book}}" step="1" max="10" min="1" class="returning__costs-reting"></div>
+                            </div>
                         </div>
+                        <hr>
+                        {% endfor %}
+                        </div>
+                    <div class="main-returning__results">
+                        <div class="returning__results">Дата возврата: <input type="date" value="{{ preliminary_date }}" name="time" class="returning__result"></div>
+                        <div class="returning__results">Итогова сумма: <input type="number" step="0.01" value="{{ tentative_cost }}" name="cost" class="returning__result"></div>
                     </div>
+                    <input type="hidden" name="register" value="{{ act }}" readonly="readonly" />
+                    {% if books %}
+                    {% for x in books %}
+                    <input type="hidden" class="" name="copy_book_{{x.id}}" value="{{ x.id }}" readonly="readonly" />
                     {% endfor %}
+                    {% endif %}
+                    <div class="main-returning__button">
+                        <button type="submit" class="main-returning__btn">Регистрация</button>
                     </div>
-                <div class="flex justify-center text-center items-center">
-                    <div class="flex justify-center text-center items-center">Дата возврата: <input type="date" value="{{ preliminary_date }}" name="time"></div>
-                    <div class="flex justify-center text-center items-center">Итогова сумма: <input type="number" step="0.01" value="{{ tentative_cost }}" name="cost"></div>
+                </form>
+                {% else %}
+                <div>
+                    <div>Книг на руках нет</div>
+                    <a href="https://">Взять книги</a>
                 </div>
-                <input type="hidden" name="register" value="{{ act }}" readonly="readonly" />
-                {% if books %}
-                {% for x in books %}
-                <input type="hidden" class="bgw" name="copy_book_{{x.id}}" value="{{ x.id }}" readonly="readonly" />
-                {% endfor %}
                 {% endif %}
-                <button type="submit" class="my-6 rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">Регистрация</button>
-            </form>
-            {% else %}
-            <div>
-                <div>Книг на руках нет</div>
-                <a href="https://">Взять книги</a>
             </div>
-            {% endif %}
         </div>
     </div>
 </div>

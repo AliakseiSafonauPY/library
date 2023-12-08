@@ -1,55 +1,71 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="grad flex justify-center w-full">
-    <div class="flex flex-col">
-        <div class="cover_photo h-[350px] w-[200px]">
-            <img src="{{cover_photo_big.cover_photo.url}}" class="w-full h-full" alt="">
-        </div>
-        <div class="flex">
-            {%if cover_photo %}
-            {% for b in cover_photo %}
-            <div class="cover_photo h-[100px] w-[50px]"><img src="{{b.cover_photo.url}}" class="w-full h-full" alt=""></div>
-            {% endfor %}
-            {% endif %}
-        </div>
-    </div>
-    <div class="flex w-[750px]">
-        <div class="p-2 w-[410px]">
-            <div class="text-5xl font-medium mb-4">{{book_info.title_ru}}</div>
-            {% if book_info.title_origin %}
-            <div>{{book_info.title_origin}}</div>
-            {% endif %}
-            <div>Genres : {{book_info.genre}}</div>
-            <div>Pages : {{book_info.pages}}</div>
-            <div>Авторы :
-                {% for b in authors %}
-                <div>{{b}}</div>
-                {% endfor %}
-            </div>
-            <div class="flex">
-                {% for b in authors_photo %}
-                <div class="h-[100px] w-[50px]"><img class="w-full h-full" src="{{b.author_photo.url}}" alt=""></div>
-                {% endfor %}
+<div class="main-content">
+    <div class="main__content-container">
+        <div class="main-page">
+            <div class="main__page-container">
+                <div class="main__page-title">{{book_info.title_ru}}</div>
             </div>
         </div>
-        <div class="pt-8 pl-2">
-            <div class="mb-8">
-                {% if book_info.instance %}
-                <div>Доступные экземпляры : {{book_info.instance}}</div>
-                <button>Выдать</button> <br>
-                {% else %}
-                <div>Нет доступных экземпляров</div>
-                {% endif %}
-                <button>Все экземпляры</button>
-            </div>
-            <div class="mb-8">
-                 <div>Дата публикации : {{book_info.publishing}}</div>
-                <div>Дата регистрауиии : {{book_info.registration}}</div>
-            </div>
-            <div>
-                <div>Price : {{book_info.price}} руб.</div>
-                <div>Price per day : {{book_info.price_per_day}} руб.</div>
+        <div class="main-info">
+            <div class="main__info-container">
+                <div class="main__info-book__content">
+                    <div class="main__info-photo">
+                        <div class="main__info-cover__photos">
+                            <img src="{{cover_photo_big.cover_photo.url}}" class="main__info-cover__photo" alt="">
+                        </div>
+                        <div class="main__info-photos">
+                            {%if cover_photo %}
+                            {% for b in cover_photo %}
+                            <div class="main__info-photos__cover_photos">
+                                <img src="{{b.cover_photo.url}}" class="main__info-photos__cover_photo" alt="">
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="main__info-main">
+                        <div class="info__main">
+                            {% if book_info.title_origin %}
+                            <div>{{book_info.title_origin}}</div>
+                            {% endif %}
+                            <div>Genres : {{book_info.genre}}</div>
+                            <div>Pages : {{book_info.pages}}</div>
+                            <div>Авторы :
+                                {% for b in authors %}
+                                <div>{{b}}</div>
+                                {% endfor %}
+                            </div>
+                            <div class="info-main__author-photos">
+                                {% for b in authors_photo %}
+                                <div class="info__author-photos">
+                                    <img class="info__author-photo" src="{{b.author_photo.url}}" alt="">
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="info__main__instances">
+                            <div class="mb-8">
+                                {% if book_info.instance %}
+                                <div>Доступные экземпляры : {{book_info.instance}}</div>
+                                <button class="info__main__instances-btn">Выдать</button> <br>
+                                {% else %}
+                                <div>Нет доступных экземпляров</div>
+                                {% endif %}
+                                <button class="info__main__instances-btn">Все экземпляры</button>
+                            </div>
+                            <div class="mb-8">
+                                <div>Дата публикации : {{book_info.publishing}}</div>
+                                <div>Дата регистрауиии : {{book_info.registration}}</div>
+                            </div>
+                            <div>
+                                <div>Price : {{book_info.price}} руб.</div>
+                                <div>Price per day : {{book_info.price_per_day}} руб.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

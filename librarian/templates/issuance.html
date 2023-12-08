@@ -1,92 +1,110 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="table grad flex items-center justify-center text-center w-full">
-    {% if popup %}
-    <div class="popup">
-        {% if popup.list %}
-        <div class="flex flex-col items-center justify-center">
-            {% for book in popup.list %}
-            <form action="" method="post" class="flex">
-                {% csrf_token %}
-                <div class="flex flex-col items-center justify-center">
-                    <div class="text-slate-900 font-medium">Название</div>
-                    <div class="text-slate-600 font-normal">{{ book.name }}</div>
-                </div>
-                <div class="flex flex-col items-center justify-center">
-                    <div class="text-slate-900 font-medium">Автор</div>
-                    <div class="text-slate-600 font-normal">{{ book.author }}</div>
-                </div>
-                <div class="flex flex-col items-center justify-center">
-                    <div class="text-slate-900 font-medium">Доступные экземпляры</div>
-                    <div class="text-slate-600 font-normal">
-                        <select name="select" id="copy">
-                            {% if book.copies %}
-                            {% for opt in book.copies %}
-                            <option value="{{opt.pk}}">{{ opt.num }}</option>
-                            {% endfor %}
-                            {% endif %}
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <button type="submit" class="my-6 rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">Добавить</button>
-                </div>
-            </form>
-            {% endfor %}
+
+<div class="main-content">
+    <div class="main__content-container">
+        <div class="main-page">
+            <div class="main__page-container">
+                <div class="main__page-title">Акт выдачи книг № {{ act }}</div>
+            </div>
         </div>
-        {% elif not popup.list %}
-        <div>Нет книг удовлетворяющих запрос</div>
-        <button type="submit"></button>
-        {% endif %}
-    </div>
-    {% endif %}
-    <div class="text-slate-700 font-medium text-7xl mb-10">Акт выдачи книг № {{ act }}</div>
-    <div class="flex flex-col justify-center text-center">
-        <div>{{ reader }}</div>
-        {% if books %}
-        {% for book in books %}
-        <div>{{book}}</div>
-        {% endfor %}
-        <button>Сдать книги</button>
-        {% else %}
-            {% if not limit %}
-                <form method="post">
-                    {% csrf_token %}
-                    <input type="search" name="q" placeholder="Искать книгу…" class="bgw">
-                    <button type="submit" class="my-6 rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">Искать</button>
-                </form>
-            {% endif %}
-        <div>
-            {% if preview %}
-            {% for x in preview %}
-                <form method="post">
-                    <div class="flex items-center justify-center text-center">
-                        <div>Название : {{  x.book  }}</div>
-                        <div>Экземпляр : {{ x.num }}</div>
-                        <input type="hidden" name="delete" value="{{ x.num }}" readonly="readonly" />
-                        <button type="submit" class="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">Убрать</button>
+        <div class="main-issuing">
+            <div class="main__issuing-container">
+                {% if popup %}
+                <div class="popup">
+                    {% if popup.list %}
+                    <div class="popup-container">
+                        {% for book in popup.list %}
+                        <form action="" method="post" class="popup-form">
+                            {% csrf_token %}
+                            <div class="">
+                                <div class="popup-form__title">Название</div>
+                                <div class="popup-form__value">{{ book.name }}</div>
+                            </div>
+                            <div class="">
+                                <div class="popup-form__title">Автор</div>
+                                <div class="popup-form__value">{{ book.author }}</div>
+                            </div>
+                            <div class="">
+                                <div class="popup-form__title">Доступные экземпляры</div>
+                                <div class="popup-form__value">
+                                    <select name="select" id="copy">
+                                        {% if book.copies %}
+                                        {% for opt in book.copies %}
+                                        <option value="{{opt.pk}}">{{ opt.num }}</option>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="popup-form__button">
+                                <button type="submit" class="popup-form__btn">Добавить</button>
+                            </div>
+                        </form>
+                        {% endfor %}
                     </div>
-                </form>
-            {% endfor %}
-            {% endif %}
-        {% if repeat %}
-            <div>Книга {{ repeat }} уже есть в списке</div>
-        {% endif %}
-            <form action="" method="post">
+                    {% elif not popup.list %}
+                    <div>Нет книг удовлетворяющих запрос</div>
+                    <button type="submit"></button>
+                    {% endif %}
+                </div>
+                {% endif %}
+                <div class="main__issuing">{{ reader }}</div>
+                {% if books %}
+                <div class="main__issuing__books">
+                    {% for book in books %}
+                    <div class="main__issuing__book">{{book}}</div>
+                    {% endfor %}
+                    <button class="main__issuing__book-btn">Сдать книги</button>
+                    {% else %}
+                </div>
+                {% if not limit %}
+                <form method="post" class="main-issuing__search-form">
                 {% csrf_token %}
-                <input type="hidden" name="register" value="{{ act }}" readonly="readonly" />
-                {% if preview %}
-                {% for x in preview %}
-                <input type="hidden" class="bgw" name="copy_book_{{x.id}}" value="{{ x.id }}" readonly="readonly" />
-                {% endfor %}
+                <input type="search" name="q" placeholder="Искать книгу…" class="bgw">
+                <button type="submit" class="main-issuing__search-btn">Искать</button>
+                </form>
                 {% endif %}
-                {% if preview %}
-                <button type="submit" class="my-6 rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">Регистрация</button>
+                <div class="main-issuing__preview">
+                    {% if preview %}
+                    {% for x in preview %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="main-issuing__preview-form">
+                                <div class="main-issuing__preview-item">Название : {{  x.book  }}</div>
+                                <div class="main-issuing__preview-item">Экземпляр : {{ x.num }}</div>
+                                <input type="hidden" name="delete" value="{{ x.num }}" readonly="readonly" />
+                                <button type="submit" class="main-issuing__preview-btn">Убрать</button>
+                            </div>
+                            <hr>
+                        </form>   
+                    {% endfor %}
+                    {% endif %}
+                {% if repeat %}
+                <div class="main-issuing__preview">
+                    <div class="main-issuing__preview-repeat">!!! <span class="main-issuing__preview-rpt">{{ repeat }}</span>, уже есть в списке.</div>
+                </div>
                 {% endif %}
-            </form>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="register" value="{{ act }}" readonly="readonly" />
+                        {% if preview %}
+                        {% for x in preview %}
+                        <input type="hidden" class="bgw" name="copy_book_{{x.id}}" value="{{ x.id }}" readonly="readonly" />
+                        {% endfor %}
+                        {% endif %}
+                        {% if preview %}
+                        <div class="main-issuing__preview-button">
+                            <button type="submit" class="main-issuing__preview__button">Регистрация</button>
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+                {% endif %}
+            </div>
         </div>
-        {% endif %}
     </div>
 </div>
+
 {% endblock %}

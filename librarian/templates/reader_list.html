@@ -1,65 +1,73 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="table grad flex items-center justify-center text-center w-full">
-    <div class="text-slate-700 font-medium text-7xl mb-10">Читатели</div>
-    <table class="flex items-center justify-center">
-        <tr>
-            <th class="text-slate-900 font-medium">Фамилия</th>
-            <th class="text-slate-900 font-medium">Имя</th>
-            <th class="text-slate-900 font-medium">Дата рождения</th>
-            <th class="text-slate-900 font-medium">Адрес</th>
-            <th class="text-slate-900 font-medium">Электронная почта</th>
-        </tr>
-        {% for reader in object_list %}
-        <tr>
-            <td>
-                <form action="{% url 'librarian:act_reverse' %}" method="post">
-                    {% csrf_token %}
-                    <input type="hidden" name="reader" value="{{ reader.pk }}">
-                    {% if process %}
-                    <input type="hidden" name="process" value="{{ process }}">
-                    {% endif %}
-                    <button type="submit" class="text-slate-600 font-normal">{{ reader.surname }}</button>
-                </form>
-            </td>
-            <td class="text-slate-600 font-normal">{{ reader.name }}</td>
-            <td class="text-slate-600 font-normal">{{ reader.birth }}</td>
-            <td class="text-slate-600 font-normal">{{ reader.residence }}</td>
-            <td class="text-slate-600 font-normal">{{ reader.email }}</td>
-        </tr>
-        {% empty %}
-        <div>No readers yet.</div>
-    {% endfor %}
-    </table>
-</div>
-
-
-<div class="pagination shadow_down">
-    <div class="flex items-center justify-center">
-        <span class="current text-slate-700 font-medium">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-    </div>
-    <div>
-        <div class="step-links bg-white px-6 py-4">
-            <ul class="flex flex-wrap items-center justify-center space-x-4">
-                {% if page_obj.has_previous %}
-                <li><a href="?page=1" class="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">&laquo; first</a></li>
-                <li><a href="?page={{ page_obj.previous_page_number }}" class="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">previous</a></li>
-                {% endif %}
-                {% for num_page in paginator.page_range %}
-                {% if page.number == num_page %}
-                <li><a href="?page={{num_page}}" class="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">{{ num_page }}</a></li>
-                {% else %}
-                <li><a href="?page={{num_page}}" class="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">{{ num_page }}</a></li>
-                {% endif %}
+<div class="main-content">
+    <div class="main__content-container">
+        <div class="main-page">
+            <div class="main__page-container">
+                <div class="main__page-title">Читатели</div>
+            </div>
+        </div>
+        <div class="main-table">
+            <div class="main__table-container">
+                <table class="fmain__table">
+                    <tr>
+                        <th class="table__th">Фамилия</th>
+                        <th class="table__th">Имя</th>
+                        <th class="table__th">Дата рождения</th>
+                        <th class="table__th">Адрес</th>
+                        <th class="table__th">Электронная почта</th>
+                    </tr>
+                    {% for reader in object_list %}
+                    <tr>
+                        <td class="table__td">
+                            <form action="{% url 'librarian:act_reverse' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="reader" value="{{ reader.pk }}">
+                                {% if process %}
+                                <input type="hidden" name="process" value="{{ process }}">
+                                {% endif %}
+                                <button type="submit" class="text-slate-600 font-normal">{{ reader.surname }}</button>
+                            </form>
+                        </td>
+                        <td class="table__td">{{ reader.name }}</td>
+                        <td class="table__td">{{ reader.birth }}</td>
+                        <td class="table__td">{{ reader.residence }}</td>
+                        <td class="table__td">{{ reader.email }}</td>
+                    </tr>
+                    {% empty %}
+                    <div>No readers yet.</div>
                 {% endfor %}
-                {% if page_obj.has_next %}
-                <li><a href="?page={{ page_obj.next_page_number }}" class="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">next</a></li>
-                <li><a href="?page={{ page_obj.paginator.num_pages }}" class="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900 shadow-inner">last &raquo;</a></li>
-                {% endif %}
-            </ul>
+                </table>
+            </div>
+        </div>
+        <div class="main-pagination">
+            <div class="main__pagination-container">
+                <div class="main__pagination-pages">
+                    <span class="main__pagination-page">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                </div>
+                <div class="main___pagination-steps">
+                    <ul class="main__steps">
+                        {% if page_obj.has_previous %}
+                        <li><a href="?page=1" class="main__step">&laquo; first</a></li>
+                        <li><a href="?page={{ page_obj.previous_page_number }}" class="main__step">previous</a></li>
+                        {% endif %}
+                        {% for num_page in paginator.page_range %}
+                        {% if page.number == num_page %}
+                        <li><a href="?page={{num_page}}" class="main__step">{{ num_page }}</a></li>
+                        {% else %}
+                        <li><a href="?page={{num_page}}" class="main__step">{{ num_page }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}" class="main__step">next</a></li>
+                        <li><a href="?page={{ page_obj.paginator.num_pages }}" class="main__step">last &raquo;</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
